@@ -1,26 +1,48 @@
 /**
- * Below are the colors that are used in the app. The colors are defined in the light and dark mode.
- * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
+ * Custom color palette for the math education app
+ * Primary colors: Purple, gray, and white
+ * Accent: Green for highlights
  */
 
-const tintColorLight = '#0a7ea4';
-const tintColorDark = '#fff';
+// Main theme colors
+const primaryPurple = '#6C63FF';
+const deepPurple = '#5A4FCF';
+const lightPurple = '#9D97FF';
+const accentGreen = '#4ECDC4';
+const neutralGray = '#F7F8FC';
+const darkGray = '#4F4F4F';
 
 export const Colors = {
   light: {
-    text: '#11181C',
-    background: '#fff',
-    tint: tintColorLight,
-    icon: '#687076',
-    tabIconDefault: '#687076',
-    tabIconSelected: tintColorLight,
+    text: '#2D2D2D',
+    secondaryText: '#6E6E6E',
+    background: '#FFFFFF',
+    card: '#FFFFFF',
+    primary: primaryPurple,
+    secondary: deepPurple,
+    accent: accentGreen,
+    border: '#EAEAEA',
+    shadow: 'rgba(108, 99, 255, 0.08)',
+    icon: darkGray,
+    tabIconDefault: '#AEAEAE',
+    tabIconSelected: primaryPurple,
+    surface: neutralGray,
+    surfaceHighlight: 'rgba(108, 99, 255, 0.1)',
   },
   dark: {
-    text: '#ECEDEE',
-    background: '#151718',
-    tint: tintColorDark,
-    icon: '#9BA1A6',
-    tabIconDefault: '#9BA1A6',
-    tabIconSelected: tintColorDark,
+    text: '#F5F5F5',
+    secondaryText: '#AEAEAE',
+    background: '#1A1A2E',
+    card: '#252543',
+    primary: lightPurple,
+    secondary: primaryPurple,
+    accent: accentGreen,
+    border: '#333355',
+    shadow: 'rgba(0, 0, 0, 0.3)',
+    icon: '#AEAEAE',
+    tabIconDefault: '#8E8E8E',
+    tabIconSelected: lightPurple,
+    surface: '#252543',
+    surfaceHighlight: 'rgba(157, 151, 255, 0.15)',
   },
 };

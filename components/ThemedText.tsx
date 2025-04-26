@@ -1,60 +1,52 @@
-import { Text, type TextProps, StyleSheet } from 'react-native';
+import React from "react";
+import { Text, TextProps } from "react-native";
+import { useColorScheme } from "@/hooks/useColorScheme";
+import { Colors } from "@/constants/Colors";
 
-import { useThemeColor } from '@/hooks/useThemeColor';
-
-export type ThemedTextProps = TextProps & {
-  lightColor?: string;
-  darkColor?: string;
-  type?: 'default' | 'title' | 'defaultSemiBold' | 'subtitle' | 'link';
-};
+interface ThemedTextProps extends TextProps {
+  variant?: "default" | "secondary" | "heading" | "subheading" | "caption";
+}
 
 export function ThemedText({
   style,
-  lightColor,
-  darkColor,
-  type = 'default',
-  ...rest
+  variant = "default",
+  ...props
 }: ThemedTextProps) {
-  const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
+  const colorScheme = useColorScheme() ?? "light";
 
-  return (
-    <Text
-      style={[
-        { color },
-        type === 'default' ? styles.default : undefined,
-        type === 'title' ? styles.title : undefined,
-        type === 'defaultSemiBold' ? styles.defaultSemiBold : undefined,
-        type === 'subtitle' ? styles.subtitle : undefined,
-        type === 'link' ? styles.link : undefined,
-        style,
-      ]}
-      {...rest}
-    />
-  );
+  const getTextStyle = () => {
+    const baseStyle = {
+      color: Colors[colorScheme].text,
+    };
+
+    switch (variant) {
+      case "heading":
+        return {
+          ...baseStyle,
+          fontSize: 24,
+          fontWeight: "700",
+          letterSpacing: 0.5,
+        };
+      case "subheading":
+        return {
+          ...baseStyle,
+          fontSize: 18,
+          fontWeight: "600",
+        };
+      case "secondary":
+        return {
+          color: Colors[colorScheme].secondaryText,
+          fontSize: 14,
+        };
+      case "caption":
+        return {
+          color: Colors[colorScheme].secondaryText,
+          fontSize: 12,
+        };
+      default:
+        return baseStyle;
+    }
+  };
+
+  return <Text style={[getTextStyle(), style]} {...props} />;
 }
-
-const styles = StyleSheet.create({
-  default: {
-    fontSize: 16,
-    lineHeight: 24,
-  },
-  defaultSemiBold: {
-    fontSize: 16,
-    lineHeight: 24,
-    fontWeight: '600',
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    lineHeight: 32,
-  },
-  subtitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  link: {
-    lineHeight: 30,
-    fontSize: 16,
-    color: '#0a7ea4',
-  },
-});
